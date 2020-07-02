@@ -4,8 +4,8 @@ services:
 
   api:
     build:
-      context: .
-    image: moleculer-demo
+      context: ./src/api
+    image: aperezl/moleculer-demo-api
     env_file: docker-compose.env
     environment:
       SERVICES: api
@@ -21,8 +21,8 @@ services:
 
   greeter:
     build:
-      context: .
-    image: moleculer-demo
+      context: ./src/greeter
+    image: aperezl/moleculer-demo-greeter
     env_file: docker-compose.env
     environment:
       SERVICES: greeter
@@ -33,8 +33,8 @@ services:
 
   products:
     build:
-      context: .
-    image: moleculer-demo
+      context: ./src/products
+    image: aperezl/moleculer-demo-products
     env_file: docker-compose.env
     environment:
       SERVICES: products

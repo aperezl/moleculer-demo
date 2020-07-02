@@ -45,13 +45,15 @@ metadata:
   name: ingress
 spec:
   rules:
-  - host: moleculer-demo.127.0.0.1.nip.io
-    http:
+  - http:
       paths:
       - path: /
         backend:
           serviceName: api
           servicePort: 3000
+    # host: moleculer-demo.127.0.0.1.nip.io
+
+          
 
 ---
 #########################################################
@@ -65,7 +67,7 @@ spec:
   selector:
     matchLabels:
       app: api
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -73,13 +75,21 @@ spec:
     spec:
       containers:
       - name: api
-        image: moleculer-demo
+        image: aperezl/moleculer-demo
+        imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
             name: common-env
         env:
           - name: SERVICES
             value: api
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
 
 ---
 #########################################################
@@ -93,7 +103,7 @@ spec:
   selector:
     matchLabels:
       app: greeter
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -101,13 +111,21 @@ spec:
     spec:
       containers:
       - name: greeter
-        image: moleculer-demo
+        image: aperezl/moleculer-demo
+        imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
             name: common-env
         env:
           - name: SERVICES
             value: greeter
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
 
 ---
 #########################################################
@@ -121,7 +139,7 @@ spec:
   selector:
     matchLabels:
       app: products
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -129,13 +147,21 @@ spec:
     spec:
       containers:
       - name: products
-        image: moleculer-demo
+        image: aperezl/moleculer-demo
+        imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
             name: common-env
         env:
           - name: SERVICES
             value: products
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
 
 ---
 #########################################################
